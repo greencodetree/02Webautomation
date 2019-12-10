@@ -1,0 +1,27 @@
+02-a Selenium 설치
+웹 자동화에 필요한 셀레니움 모듈 설치
+브라우저 제어를 위한 버전에 맞는 크롬드라이버 설치, 프로젝트 폴더에 넣기
+
+02-b 유투브 키워드 검색
+개발자 도구 연 뒤 검색창 안쪽 부분 inspect element
+하이라이트 부분 우클릭 - copy - copy xpath(셀레니움에서 사용하는 어떤 특정 요소를 가리키는 경로 지정법)
+코드 작성뒤 실행시 자동으로 크롬 실행
+time.sleep(3)   #시간간격 3초
+search = driver.find_element_by_xpath('//*[@id="search"]')
+#검색어창을 변수 search에 저장, driver = 브라우저
+search.send_keys('반원 코딩')    #검색어창을 지정한뒤 특정 검색어 지정
+엔터 위해 search.send keys(Keys.ENTER)
+
+02-c 1. 1 to 50 - 페이지 분석
+1부터 50까지 누르는 웹게임을 자동으로 누르는 프로그램 http://zzzscore.com/1to50
+우선 게임에서 사용되는 모든 버튼의 요소 정보를 가져오기
+//*[@id="grid"]/div[1]/span 형식으로 되어있고 끝의 숫자들만 바뀌는 xpath를 모두 가져오기 위해서는 
+데이터가 변할 부분을 *로 대체, btns = driver.find_elements_by_xpath('//*[@id="grid"]/div[*]')
+모든 버튼 25개의 xpath 를 btns 리스트에 저장, print(len(btns))시 총 버튼수인 25 출력
+print(btns[0].text) 시 0번 인덱스인 첫번째 버튼의 내부내용(.text)가 출력됨
+
+02-c 2. 첫번째 정답 클릭하기
+1을 누르게 하기 위해서는 btns에 들어있는 요소들중 text가 1인것을 찾기
+for btn in btns:
+    if btn.text=="1":
+        btn.click()	#btn text가 1일시 클릭
